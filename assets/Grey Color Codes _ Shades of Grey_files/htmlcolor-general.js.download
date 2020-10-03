@@ -1,0 +1,234 @@
+/* Initialize Components */
+(function($) {
+	"use strict"; // Start of use strict
+
+	// toggle the side navigation
+	$("#sidebarToggle").on('click', function(e) {
+		e.preventDefault();
+		$("body").toggleClass("sidebar-toggled");
+		$(".sidebar").toggleClass("toggled");
+
+		toggleSideBarText();
+	});
+
+	function toggleSideBarText() {
+		if ($("body").hasClass("sidebar-toggled")) {
+			$(".nav-link.color-group span").contents().each(function () {
+				if (this.nodeType === 3) this.nodeValue = $.trim($(this).text()).replace(/Colors/g, "");
+			});
+		} else {
+			$(".nav-link.color-group span").contents().each(function () {
+				if (this.nodeType === 3) this.nodeValue = $.trim($(this).text()+" Colors");
+			});
+		}
+	}
+
+	// Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+	$('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {
+		if ($(window).width() > 768) {
+			var e0 = e.originalEvent,
+				delta = e0.wheelDelta || -e0.detail;
+			this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+			e.preventDefault();
+		}
+	});
+
+})(jQuery); // End of use strict
+
+// for IE 7 and 8
+if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function(obj, start) {
+         for (var i = (start || 0), j = this.length; i < j; i++) {
+             if (this[i] === obj) { return i; }
+         }
+         return -1;
+    }
+}
+ 
+// helper: check if hex value is a color
+function isColor(hex) {
+	return (/^#[0-9A-F]{6}$/i.test("#"+hex));
+}
+
+function alterColorView(hex, name)
+{
+	$(".side-hex").text(hex);
+	let currentColor = tinycolor(hex);
+	$(".side-rgb").text(currentColor.toRgbString());
+	$(".side-hsl").text(currentColor.toHslString());
+	$(".side-hsv").text(currentColor.toHsvString());
+	$(".side-name").text((currentColor.toName()) ? currentColor.toName() : "");
+	
+	if ($(".side-name").is(":empty") && name !== "") {
+	    $(".side-name").text(name);
+	}
+	
+	$("#color-view-header").css("border-bottom-color", hex);
+	$("#color-view-icon").css("color", hex);
+	$("#color-view-example").css("background-color", hex);
+
+	// store last 8 viewed colors
+	if (storage) {
+		let recent = (storage.getItem("recent-colors")) ? storage.getItem("recent-colors") : "";
+		if (recent.length <= 56) {
+			if (recent.indexOf(hex) === -1) {
+				storage.setItem("recent-colors", hex + recent);
+			}
+		} else {
+			storage.setItem("recent-colors", hex);
+		}
+	}
+}
+
+// on load	
+$(function() {
+
+	$(document).on('click', ".color-sel", function() {
+		let hex = $(this).data('hex');
+	    let name = $(this).find('.color-sub').text();
+		if (name !== "") {
+			alterColorView(hex, name)
+		} else {
+			alterColorView(hex, "")
+		}
+	});
+
+    // highlight active menus
+    let url = window.location;
+    let el = $('a.nav-link').filter(function() {
+        return this.href == url;
+    }).parent().addClass("active");
+
+});
+
+/* color picking components */
+$(function() {
+
+	"use strict";
+	let parentMain = document.querySelector('#main-color');
+	let randomColor = tinycolor.random();
+
+	if (((window.location.href).indexOf("image")) === -1) {
+		let colorRow = document.getElementsByClassName("color-row")[0];
+		if (colorRow) {
+			let colorSelect = colorRow.getElementsByClassName("color-sel");
+			if (colorSelect) {
+				let randomColor = colorSelect[Math.floor(Math.random() * colorSelect.length)];
+				alterColorView(randomColor.getAttribute('data-hex'), $(randomColor).find(".color-sub").text());
+			}
+		} else {
+			alterColorView('#' + randomColor.toHex());
+		}
+	}
+
+	if (parentMain) {
+
+		/* Non-popup picker */
+		let picker = new Picker({
+			parent: parentMain,
+			popup: false,
+			alpha: false,
+			editor: false,
+			color: '#' + randomColor.toHex(),
+			onChange: function (color) {
+				let currentColor = tinycolor(color.hex);
+				document.getElementById('color-example').style.backgroundColor = color.rgbaString;
+				$("#color-example").data("hex", color.hex.substring(0, 7));
+				document.getElementById('color-example-hex').value = color.hex.substring(0, 7);
+				document.getElementById('color-example-rgb').innerHTML = color.rgbString;
+				document.getElementById('color-example-hsl').innerHTML = color.hslString;
+			},
+		});
+
+		$("#color-example-hex").keyup(function(){
+			if (/^#[0-9A-F]{6}$/i.test($(this).val())) {
+				picker.setColor($(this).val());
+				alterColorView($(this).val());
+			}
+		});
+
+	}
+
+	function colorChange(color) {
+		var tiny = tinycolor(color);
+		var ret = tiny.toHex();
+		return ret;
+	}
+	
+	$("#color-search-submit").bind("click", function() {
+		window.location = "/hex/" + colorChange($("#color-search").val());
+	});
+
+	$('#color-search').keypress(function(e) {
+	    if (e.which == '13') {
+	    	window.location = "/hex/" + colorChange($("#color-search").val());
+	    }
+
+		if (/^#[0-9A-F]{6}$/i.test($(this).val())) {
+
+		}
+	});
+
+	// helper: check if color is light
+	function isTooLight(hexcolor){
+		  var r = parseInt(hexcolor.substr(0,2),16);
+		  var g = parseInt(hexcolor.substr(2,2),16);
+		  var b = parseInt(hexcolor.substr(4,2),16);
+		  var yiq = ((r*299)+(g*587)+(b*114))/1000;
+		  return yiq >= 128;
+	 }
+
+	// init color picker
+
+});
+
+/**************************************
+ * Recent Colors Functionality
+ **************************************/
+
+// Detect Local Storage
+var storage = (function() {
+  var uid = new Date;
+  var storage;
+  var result;
+  try {
+    (storage = window.localStorage).setItem(uid, uid);
+    result = storage.getItem(uid) == uid;
+    storage.removeItem(uid);
+    return result && storage;
+  } catch (exception) {}
+}());
+
+$(function() {
+	
+	if (storage) {
+		
+		var TOTAL_RECENT = 20;
+		
+		var recentColors = storage.getItem("recent-colors");
+		var recentColorItems = new Array();
+		
+		if (recentColors != null) {
+			recentColorItems = recentColors.split("-");
+		}
+		
+		var url = window.location.href;
+		var lastSegment = url.substr(url.lastIndexOf('hex/') + 4);
+	
+		if (isColor(lastSegment)) {
+			
+			if (recentColorItems.indexOf(lastSegment) < 0) {
+				
+				recentColorItems.unshift(lastSegment);
+		
+				// truncate
+				if (recentColorItems.length > TOTAL_RECENT) {
+					recentColorItems = recentColorItems.slice(0, TOTAL_RECENT);
+				}
+			
+				storage.setItem("recent-colors", recentColorItems.join("-"));
+			}
+		}
+
+	}
+});

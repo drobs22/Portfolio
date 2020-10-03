@@ -1,0 +1,164 @@
+
+<!-- saved from url=(0071)https://s0.2mdn.net/6392020/1593012674899/LD_PR_PW_01/banner/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    
+    
+    <meta name="ad.size" content="width=320,height=50">
+    <script type="text/javascript">
+        var clickTag = "https://www.paypal.com/us/webapps/mpp/pay-with-rewards";
+    </script>
+    <link href="./css" rel="stylesheet">
+<script type="text/javascript">
+    
+  (function() {
+    var MAX_URL_PARAM_LENGTH = 34;
+    var CLICK_X_URL_KEY = 'nx';
+    var CLICK_Y_URL_KEY = 'ny';
+    var CREATIVE_DIMENSIONS_KEY = 'dim';
+    var AD_URL_PARAM = '&adurl=';
+
+    var relegateNavigation = '';
+    var urlParamMap = {};
+
+    urlParamMap[CLICK_X_URL_KEY] = null;
+    urlParamMap[CLICK_Y_URL_KEY] = null;
+    urlParamMap[CREATIVE_DIMENSIONS_KEY] = null;
+
+    var handleClickTagMessage = function(e) {
+      try {
+        var eventData = JSON.parse(e.data);
+      } catch (err) {
+        return;
+      }
+      if (eventData.isInitClickTag) {
+        if (eventData.clickTags) {
+          for (var i = 0; i < eventData.clickTags.length; i++) {
+            var clkTag = eventData.clickTags[i];
+            window[clkTag.name] = clkTag.url;
+          }
+        } else if (eventData.clickTag) {
+          window.clickTag = eventData.clickTag;
+        }
+        relegateNavigation = eventData.relegateNavigation;
+      }
+    };
+
+    var storeClickCoordinates = function(e) {
+      urlParamMap[CLICK_X_URL_KEY] = Math.round(e.clientX);
+      urlParamMap[CLICK_Y_URL_KEY] = Math.round(e.clientY);
+    };
+
+    var getCreativeDimensions = function() {
+      return window.innerWidth + 'x' + window.innerHeight;
+    }
+
+    var getExitClickParams = function(e) {
+      urlParamMap[CREATIVE_DIMENSIONS_KEY] = getCreativeDimensions();
+
+      var exitParams = '';
+      for (var key in urlParamMap) {
+        exitParams += '&' + key + '=';
+        if (urlParamMap[key] !== null) {
+          exitParams += urlParamMap[key];
+        }
+      }
+      return exitParams;
+    }
+
+    var appendExitClickParams = function(url) {
+      var adUrlIndex = url.toLowerCase().indexOf(AD_URL_PARAM);
+      var paramsToBeAdded = getExitClickParams();
+      if (adUrlIndex > -1 && paramsToBeAdded.length <= MAX_URL_PARAM_LENGTH) {
+        url = url.substr(0, adUrlIndex) + paramsToBeAdded +
+          url.substr(adUrlIndex);
+      };
+      return url;
+    };
+
+    if (open.call) {
+      window.open = function(open) {
+        return function(url, name, features) {
+          url = appendExitClickParams(url);
+          if (relegateNavigation === 'parent') {
+            var message = {'clickTag': url, 'isPostClickTag': true};
+            parent.postMessage(JSON.stringify(message), '*');
+          } else {
+            var args = [url, name];
+            if (features) {
+              args.push(features);
+            }
+            open.apply(window, args);
+          }
+        };
+      }(window.open);
+    }
+
+    if (window.addEventListener) {
+      window.addEventListener(
+          'message', handleClickTagMessage, false);
+      window.addEventListener('mousedown', storeClickCoordinates, true);
+    } else {
+      window.attachEvent('onmessage', handleClickTagMessage);
+    }
+  })();
+    
+  </script></head>
+
+<body>
+
+    <!-- BEGIN BANNER -->
+    <div id="banner_container_dc" style="display: block;">
+        <div id="blank"></div>
+        <!-- BEGIN DOUBLECLICK CONTENT -->
+        <div id="content_dc">
+           
+
+            
+            
+            <div class="assets">
+               
+                <div id="bg"></div>
+                
+                
+
+
+
+                <div id="bg-panel" style="opacity: 1;"></div>
+
+
+               <!--  <div id="partners">
+                 
+                    <img src="logo-partners.png" >
+                    <div id="partner-cover"></div>  
+                </div> -->
+            </div>
+
+            <div id="text-1" class="text"><div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 0;">D</div><div style="position: relative; display: inline-block; opacity: 0;">o</div><div style="position: relative; display: inline-block; opacity: 0;">n</div><div style="position: relative; display: inline-block; opacity: 0;">'</div><div style="position: relative; display: inline-block; opacity: 0;">t</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 0;">w</div><div style="position: relative; display: inline-block; opacity: 0;">a</div><div style="position: relative; display: inline-block; opacity: 0;">i</div><div style="position: relative; display: inline-block; opacity: 0;">t</div></div></div>
+            <div id="text-2" class="text" style="opacity: 0;"> <div style="position:relative;display:inline-block;"> <div style="position: relative; display: inline-block; opacity: 1;">S</div><div style="position: relative; display: inline-block; opacity: 1;">p</div><div style="position: relative; display: inline-block; opacity: 1;">e</div><div style="position: relative; display: inline-block; opacity: 1;">n</div><div style="position: relative; display: inline-block; opacity: 1;">d</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">y</div><div style="position: relative; display: inline-block; opacity: 1;">o</div><div style="position: relative; display: inline-block; opacity: 1;">u</div><div style="position: relative; display: inline-block; opacity: 1;">r</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">c</div><div style="position: relative; display: inline-block; opacity: 1;">r</div><div style="position: relative; display: inline-block; opacity: 1;">e</div><div style="position: relative; display: inline-block; opacity: 1;">d</div><div style="position: relative; display: inline-block; opacity: 1;">i</div><div style="position: relative; display: inline-block; opacity: 1;">t</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">c</div><div style="position: relative; display: inline-block; opacity: 1;">a</div><div style="position: relative; display: inline-block; opacity: 1;">r</div><div style="position: relative; display: inline-block; opacity: 1;">d</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">r</div><div style="position: relative; display: inline-block; opacity: 1;">e</div><div style="position: relative; display: inline-block; opacity: 1;">w</div><div style="position: relative; display: inline-block; opacity: 1;">a</div><div style="position: relative; display: inline-block; opacity: 1;">r</div><div style="position: relative; display: inline-block; opacity: 1;">d</div><div style="position: relative; display: inline-block; opacity: 1;">s</div></div><br><div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">a</div><div style="position: relative; display: inline-block; opacity: 1;">t</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">m</div><div style="position: relative; display: inline-block; opacity: 1;">i</div><div style="position: relative; display: inline-block; opacity: 1;">l</div><div style="position: relative; display: inline-block; opacity: 1;">l</div><div style="position: relative; display: inline-block; opacity: 1;">i</div><div style="position: relative; display: inline-block; opacity: 1;">o</div><div style="position: relative; display: inline-block; opacity: 1;">n</div><div style="position: relative; display: inline-block; opacity: 1;">s</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">o</div><div style="position: relative; display: inline-block; opacity: 1;">f</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">o</div><div style="position: relative; display: inline-block; opacity: 1;">n</div><div style="position: relative; display: inline-block; opacity: 1;">l</div><div style="position: relative; display: inline-block; opacity: 1;">i</div><div style="position: relative; display: inline-block; opacity: 1;">n</div><div style="position: relative; display: inline-block; opacity: 1;">e</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">s</div><div style="position: relative; display: inline-block; opacity: 1;">t</div><div style="position: relative; display: inline-block; opacity: 1;">o</div><div style="position: relative; display: inline-block; opacity: 1;">r</div><div style="position: relative; display: inline-block; opacity: 1;">e</div><div style="position: relative; display: inline-block; opacity: 1;">s</div></div> </div>
+
+
+
+            
+            <div id="text-end" class="text end" style="opacity: 1;"> <div style="position:relative;display:inline-block;"> <div style="position: relative; display: inline-block; opacity: 1;">G</div><div style="position: relative; display: inline-block; opacity: 1;">e</div><div style="position: relative; display: inline-block; opacity: 1;">t</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">s</div><div style="position: relative; display: inline-block; opacity: 1;">t</div><div style="position: relative; display: inline-block; opacity: 1;">a</div><div style="position: relative; display: inline-block; opacity: 1;">r</div><div style="position: relative; display: inline-block; opacity: 1;">t</div><div style="position: relative; display: inline-block; opacity: 1;">e</div><div style="position: relative; display: inline-block; opacity: 1;">d</div></div> <div style="position:relative;display:inline-block;"><div style="position: relative; display: inline-block; opacity: 1;">n</div><div style="position: relative; display: inline-block; opacity: 1;">o</div><div style="position: relative; display: inline-block; opacity: 1;">w</div></div> </div>
+
+            <div id="disclaimer" style="opacity: 1; top: 31px;">Enrollment required. Available on eligible purchases. Terms apply.</div>
+
+            <img id="logo" src="./logo-paypal.svg">
+
+            <div id="backgroundExit1"></div>
+            <div id="border-container"></div>
+        </div>
+        <!-- END DOUBLECLICK CONTENT-->
+        <div id="cover" style="opacity: 0; visibility: hidden;"></div>
+
+    </div>
+    <!-- END BANNER-->
+    
+    <script src="./gsap.min.js.download" type="text/javascript"></script>
+    <script src="./SplitText.min.js.download" type="text/javascript"></script>
+    <script src="./script.js.download" type="text/javascript"></script>
+
+
+
+</body></html>

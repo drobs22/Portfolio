@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="main.css">
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+   <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <title>Portfolio</title>  
+</head>
+<body class="wrapper">
+    <section style id="topsection">
+    <nav class="topnav">
+    <ul class="menu">
+        <li><a class="button" href="#about">About</a></li>
+        <li><a class="button" href="#portfolio">Portfolio</a></li>
+        <li><a class="button" href="#contact">Contact</a></li>
+    </ul>  
+</nav>
+<br>
+<br>
+<br>
+
+<div class="name">
+    <h1>Drew Roberts </h1>
+</div>
+
+<div class="scroll">
+    <p>Software Developer &nbsp;&nbsp; Web Developer </p>
+</div>
+</section>
+<hr>
+<section id="about">
+    <h1 id="abouttitle">About Me</h1>
+<section class="aboutinfo">
+    <div class="headshot">  
+    <img id="headshotpic" src="..//Portfolio/assets/Headshot.jpeg">
+    </div>
+    <div class="aboutmeinfo">
+    <p id="infotitle">  Hi, I am Drew Roberts. I am currently enrolled at Eleven Fifty Academy where I am learning C# and html.</p>
+    <p id="info"> My previous experience was in account management. I spent over 15 years working in the wholesale clothing as manufactures representative. I have always been interested in technoloy and decided to learn software and web development as a career change.</p>
+</div>
+</section>
+</section>
+<hr>
+<section id="portfolio">
+    <h1 id="portfoliotitle">Portfolio</h1>
+<section class="portfolioinfo">
+    <div class="portlink">
+   <a class="creature" href="https://codepen.io/drobs22/pen/KKzzVzm">
+    <img src="..//Portfolio/assets/Big Bird.png" width="125" height="125">
+    <p class="projecttitles">Creature</p>
+    </a>
+</div>
+    <div class="portlink">
+   <a class="store" href="https://drobs22.github.io/staticstorefront/">
+    <img src="..//Portfolio/assets/Chloes Logo.png" width="125" height="125">
+    <p class="projecttitles">Store Front</p>
+</a>
+</div>
+</section>
+</section>
+<hr>
+<!--<form>
+    <fieldset class="contact">
+        <h1>Contact Me</h1>
+        
+            <p class="contactbox">
+                <input type="text" id="Subject" placeholder="Subject*">
+            </p>
+            <p class="contactbox">
+            <input type="text" id="Email" placeholder="Email*">
+            </p>
+            <p class="contactbox">
+                <input type="text" id="Phone" placeholder="Phone">
+            </p>
+            <p class="messagebox">
+                <textarea id="Message" placeholder="Message*"></textarea>
+            </p>
+            <p><button type="button" class="contactbox">Submit</button></p>-->
+
+            <section id="contact">
+    <div class="form-style-8">
+        <h2>Contact Me</h2>
+        <form>
+          <input type="text" name="field1" placeholder="Subject" />
+          <input type="email" name="field2" placeholder="Email" />
+          <input type="phone" name="field3" placeholder="Phone" />
+          <textarea placeholder="Message" onkeyup="adjust_textarea(this)"></textarea>
+          <input type="button" value="Send Message" />
+        </form>
+      </div>
+      <p class="socials">
+            <a class="linkedin" href="http://www.linkedin.com/in/andrewroberts22">
+            <span class="iconify" data-icon="et:linkedin" data-inline="false"></span>
+            </a>
+            
+            <a class="github" href="http://www.github.com/drobs22">
+                <span class="iconify" data-icon="ion-social-github-outline" data-inline="false"></span>
+            </a>
+            </p>
+        </section>
+<hr>
+<footer>
+    <p class="copyright">Copyright &copy; Drew Roberts 2020 </p>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    $(window).scroll(function(){
+    $('nav').toggleClass('scrolled', $(this).scrollTop() > 100);
+    });
+   </script>
+</body>
+</html>
